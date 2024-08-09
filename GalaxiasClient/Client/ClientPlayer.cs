@@ -5,7 +5,7 @@ using Galaxias.Util;
 namespace ClientGalaxias.Client;
 public class ClientPlayer : Player
 {
-    public ClientPlayer(AbstractWorld world) : base(world)
+    public ClientPlayer(AbstractWorld world, EntityType entityType) : base(world, entityType)
     {
 
     }

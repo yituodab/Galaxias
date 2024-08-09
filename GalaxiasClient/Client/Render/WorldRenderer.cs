@@ -1,5 +1,6 @@
 ﻿using ClientGalaxias.Client.Main;
 using Galaxias.Core.World;
+using Galaxias.Core.World.Entities;
 using Galaxias.Core.World.Tiles;
 using Microsoft.Xna.Framework;
 using System;
@@ -16,7 +17,6 @@ public class WorldRenderer
     private Camera camera;
     private TileRenderer tileRenderer;
     private ItemRenderer itemRenderer;
-    private EntityRenderer entityRenderer = new();
     private float sunRadius;
     private float scaleHeight;
     public WorldRenderer(GalaxiasClient galaxias, Camera camera, TileRenderer tileRenderer)
@@ -70,8 +70,13 @@ public class WorldRenderer
             //renderer.Draw("Assets/Textures/Misc/blank", (float)box.minX * scale, (float)-(box.minY + box.GetHeight()) * scale, (float)box.GetWidth(), (float)box.GetHeight(), hitColor);
 
             byte Brightness = _world.GetCombinedLight((int)e.x, (int)e.y + 1);
+            e.GetEntityType();
+            foreach(var render in EntityRenderers.entityRendererRegister){
+                if(e.GetEntityType() == render.Key)
+                render.Value.Render(renderer, (float)e.x * scale, (float)-e.y * scale , e, scale, ShadowColor[Brightness]);
+            }
             //var erenderer = e.GetRenderer();
-            entityRenderer.Render(renderer, (float)e.x * scale, (float)-e.y * scale , 2, 4, e, scale, ShadowColor[Brightness], "player");
+            
 
         });
 

@@ -13,17 +13,20 @@ public abstract class Entity
     public Direction direction { get; protected set; }
     public HitBox hitbox { get; protected set; } = HitBox.Empty();
     private AbstractWorld world;
+    private EntityType type;
     public float speed;
     //private EntityRenderer renderer;
     public bool onGround;
     public bool collidedHor;
     public bool collidedVert;
     protected double lastY;
-    public Entity(AbstractWorld world)
+    public Entity(AbstractWorld world, EntityType entityType)
     {
+        this.type = entityType;
         this.world = world;
         //renderer = new EntityRenderer();
     }
+
     public virtual void Update(float dTime)
     {
         lastY = y;
@@ -164,6 +167,9 @@ public abstract class Entity
     }
     public AbstractWorld GetWorld(){
         return this.world;
+    }
+    public EntityType GetEntityType(){
+        return this.type;
     }
 }
 

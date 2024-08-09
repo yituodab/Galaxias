@@ -9,10 +9,11 @@ public class LivingEntity : Entity
     protected bool isFalling;
     protected double fallDistance = 0;
     private bool lastOnGround = true;
-    public LivingEntity(AbstractWorld world) : base(world)
-    {
 
+    public LivingEntity(AbstractWorld world, EntityType entityType) : base(world, entityType)
+    {
     }
+
     public override void Update(float dTime)
     {
         HandleFalling();

@@ -7,20 +7,21 @@ using Microsoft.Xna.Framework.Graphics;
 namespace ClientGalaxias.Client.Render;
 public class EntityRenderer
 {
-    //private readonly Dictionary<Entity, Texture2D> entityToTexture = new Dictionary<Entity, Texture2D>();
-    //public void LoadContent(TextureManager manager)
-    //{
-        //foreach (var entityId in AllEntities.entityRegister)
-        //{
-            //entityToTexture.Add(new Player(null), manager.LoadTexture2D("Textures/Entities/" + "player"));
-        //}
-    //}
+    public float width;
+    public float height;
+    public EntityRenderer(float width,float height){
+        this.width = width;
+        this.height = height;
+    }
+    public virtual string GetTexture(){
+        return null;
+    }
     
-    public void Render(IntegrationRenderer renderer, float renderX, float renderY, float width, float height,Entity entity, int scale, Color colors, string name)
+    public void Render(IntegrationRenderer renderer, float renderX, float renderY, Entity entity, int scale, Color colors)
     {
-        //Texture2D entityTexture = entityToTexture.GetValueOrDefault(entity);
+        //Texture2D entityTexture = entityToTexture.GetValueOrDefault();
         //if(entityTexture != null)
-        renderer.Draw("Textures/Entities/" + name, renderX - width * scale / 2, renderY - height * scale, colors,
+        renderer.Draw(this.GetTexture(), renderX - width * scale / 2, renderY - height * scale, colors,
             effects: entity.direction == Direction.Left ? SpriteEffects.FlipHorizontally : SpriteEffects.None);
                 
     }
